@@ -8,19 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var manager: RecipesManager
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        VStack{
+            Text("Categories")
+                .font(.title)
+                .bold()
+            
+            ForEach(manager.categories){category in
+                Text(category.id)
+                Text(category.strCategory)
+                Text(category.strCategoryThumb)
+                Text(category.strCategoryDescription)
+            }
         }
-        .padding()
+//        RecipesView()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(RecipesManager())
     }
 }
