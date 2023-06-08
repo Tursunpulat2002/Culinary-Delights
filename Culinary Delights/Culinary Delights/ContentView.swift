@@ -10,19 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var manager: RecipesManager
     var body: some View {
-        VStack{
-            Text("Categories")
-                .font(.title)
-                .bold()
-            
-            ForEach(manager.categories){category in
-                Text(category.id)
-                Text(category.strCategory)
-                Text(category.strCategoryThumb)
-                Text(category.strCategoryDescription)
-            }
-        }
-//        RecipesView()
+        CategoryView()
     }
 }
 
