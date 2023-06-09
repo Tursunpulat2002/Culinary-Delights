@@ -11,7 +11,7 @@ import SwiftUI
 class RecipesManager: ObservableObject{
     @Published var categories: [Category] = []
     @Published var meals: [Meal] = []
-    @Published var recipe: [Recipe] = []
+    @Published var recipes: [Recipe] = []
     let mealURL: String = "https://themealdb.com/api/json/v1/1/filter.php?c="
     let recipeURL: String = "https://themealdb.com/api/json/v1/1/lookup.php?i="
     
@@ -38,7 +38,7 @@ class RecipesManager: ObservableObject{
                 DispatchQueue.main.async {
                     do {
                         let returns = try JSONDecoder().decode(Recipes.self, from: data)
-                        self.recipe = returns.recipes
+                        self.recipes = returns.recipes
                     } catch let error {
                         print("Error decoding: ", error)
                     }

@@ -12,9 +12,11 @@ struct RecipeView: View {
     let meal: Meal
     var body: some View {
         VStack{
-            Text(meal.id)
-            Text(meal.strMeal)
-            Text(meal.strMealThumb)
+            ForEach(manager.recipes){ i in
+                Text(i.id)
+            }
+        }.onAppear{
+            manager.getRecipe(recipeurl: manager.recipeURL+meal.id)
         }
     }
 }

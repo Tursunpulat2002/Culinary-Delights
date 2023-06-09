@@ -9,20 +9,32 @@ import SwiftUI
 
 struct MealsView: View {
     @EnvironmentObject var manager: RecipesManager
+    @State private var showSheet: Bool = false
     var category: Category
     var body: some View {
-        NavigationView {
-            List(manager.meals) { meal in
-                NavigationLink(destination: CategoryView()) {
-                    Text(meal.strMeal)
-                }
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
+        NavigationView{
+            ZStack{
+               Color("Sunset").ignoresSafeArea()
+                VStack{
                     Text("Meals")
                         .font(.largeTitle.bold())
-                        .accessibilityAddTraits(.isHeader)
+                    ScrollView(showsIndicators: false){
+                        ForEach(manager.meals){ meal in
+//                            NavigationLink(destination: RecipeView(meal: meal)) {
+                                MealCardView(meal: meal)
+                                    .cornerRadius(10)
+                                    .frame(minHeight: 320)
+                                    .shadow(color: Color.black.opacity(0.6), radius: 2, x: 0, y: 5)
+                                    .padding()
+                                    .sheet(isPresented: $showSheet, content: {
+                                        RecipeView(meal: meal)
+                                    })
+                                    .onTapGesture {
+                                        showSheet.toggle()
+                                    }
+//                            }
+                        }
+                    }
                 }
             }
         }.onAppear{
