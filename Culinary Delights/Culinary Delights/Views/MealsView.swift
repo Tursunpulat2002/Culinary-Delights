@@ -18,7 +18,7 @@ struct MealsView: View {
             ZStack{
                 Color("Background").ignoresSafeArea()
                 VStack{
-                    Text("Meals")
+                    Text(category.strCategory+" Meals")
                         .font(.largeTitle.bold())
                     // need scrollview to scroll through meals
                     ScrollView(showsIndicators: false){
