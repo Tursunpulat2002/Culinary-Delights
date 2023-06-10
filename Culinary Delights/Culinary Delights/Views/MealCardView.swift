@@ -10,20 +10,26 @@ import SwiftUI
 struct MealCardView: View {
     let meal: Meal
     var body: some View {
-        ZStack{
-            Color("Background").ignoresSafeArea()
-            VStack{
-                AsyncImage(
-                    url: URL(string: meal.strMealThumb),
-                    content: { image in
-                        image.resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(maxWidth: 300, maxHeight: 300)
-                    },
-                    placeholder: {
-                        ProgressView()
-                    }
-                )
+        ZStack(alignment: .top) {
+            Color("CardBackground").ignoresSafeArea()
+            // Get image from url
+            AsyncImage(
+                url: URL(string: meal.strMealThumb),
+                content: { image in
+                    image
+                        .resizable()
+                        .cornerRadius(10)
+                        .aspectRatio(contentMode: .fill)
+                },
+                placeholder: {
+                    ProgressView()
+                }
+            )
+            LinearGradient(gradient: Gradient(colors: [.clear, .black]), startPoint: .center, endPoint: .bottom)
+                .opacity(0.7)
+            
+            // Show passed in meal name
+            VStack(alignment: .leading){
                 Spacer()
                 Text(meal.strMeal)
                     .shadow(color: .black, radius: 1)

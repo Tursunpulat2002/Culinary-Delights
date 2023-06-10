@@ -10,19 +10,21 @@ import SwiftUI
 struct CategoryView: View {
     @EnvironmentObject var manager: RecipesManager
     var body: some View {
+        // Nav View so i can use nav links
         NavigationView{
             ZStack{
-                Color("Sunset").ignoresSafeArea()
+                Color("Background").ignoresSafeArea()
                 VStack{
                     Text("Categories")
                         .font(.largeTitle.bold())
+                    // need scrollview to scroll through categories
                     ScrollView(showsIndicators: false){
+                        // loop through each category and generate a nav link
                         ForEach(manager.categories){ category in
                             NavigationLink(destination: MealsView(category: category)) {
                                 CategoryCardView(category: category)
                                     .cornerRadius(10)
-                                    .frame(minHeight: 320)
-                                    .shadow(color: Color.black.opacity(0.6), radius: 2, x: 0, y: 5)
+                                    .shadow(color: Color.black.opacity(0.4), radius: 3, x: 0, y: 4)
                                     .padding()
                             }
                         }

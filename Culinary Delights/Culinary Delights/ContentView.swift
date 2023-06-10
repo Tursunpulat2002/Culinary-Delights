@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var manager: RecipesManager
     var body: some View {
+        // Main View
         CategoryView()
     }
 }
